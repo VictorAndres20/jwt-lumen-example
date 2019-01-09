@@ -12,9 +12,7 @@
 */
 
 /** Main route for API */
-$router->get('/', function () use ($router) {
-    return $router->app->version();
-});
+$router->get('/','WelcomeController@index');
 
 /** Simple route to get a random str for keys */
 $router->get('/keygenerator', function () use ($router) {
