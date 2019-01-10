@@ -30,6 +30,8 @@ class UserController extends Controller
 
     /**
      * Get all users using User model method
+     * 
+     * @return response
      */
     public function getAll()
     {
@@ -39,11 +41,13 @@ class UserController extends Controller
     }
 
     /****************************************************************
-     * Posts requests
+     * Puts requests
      */
 
     /**
-     * Update login Column
+     * Update user's login Column
+     * 
+     * @return response
      *  
      */
     public function updateLogin()
@@ -61,5 +65,46 @@ class UserController extends Controller
         }        
     }
 
+    /****************************************************************
+     * Posts requests
+     */
+
+    /**
+     * Create a new User
+     * 
+     * @param name Name of the user
+     * @param login User Name for login of the user
+     * @param mail Mail of the user
+     * @param pass Password of the user
+     * 
+     * @return response
+     */
+    public function insert()
+    {
+        $id=-1;
+        $res="Error";
+        $me=json_decode(json_encode($this->request->auth),true);
+        $cod_user=$me[0]['cod_user'];
+        $data=json_decode(file_get_contents("php://input"),true);
+        if(count(User::getByLoginMail($data['login'],$data['mail']))!=0)
+        {
+            $res="Usuario ya esxiste";
+        }
+        else if(!filter_var($data['mail'], FILTER_VALIDATE_EMAIL))
+        {
+            $res="Correo no válido";
+        }
+        else if(User::insert($data['name'],$data['login'],$data['mail'],$data['pass']))
+        {
+            $id=1;
+            $res="Usuario registrado";
+        } 
+        else
+        {
+            $res="Error en el registro";
+        } 
+
+        return response()->json(["id"=>$id,"me"=>$cod_user,"data"=>$res]);
+    }
 
 }

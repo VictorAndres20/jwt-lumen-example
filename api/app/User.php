@@ -33,7 +33,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     ];
 
     /********************************************************
-     * Select Methods Using DB query
+     * SELECT Methods Using DB query
      */
 
     /**
@@ -62,7 +62,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     }
 
     /************************************************************
-     * Update methods
+     * UPDATE methods
      */
 
     /**
@@ -78,6 +78,34 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         try
         {
             DB::update('UPDATE usuario SET login_user=? WHERE cod_user=?',[$login,$cod_user]);
+            return true;
+        }
+        catch(Exception $e)
+        {
+            return false;
+        }
+    }
+
+    /************************************************************
+     * INSERT methods
+     */
+
+    /**
+     * Insert a new User
+     * @param name Name of the user
+     * @param login User Name for login of the user
+     * @param mail Mail of the user
+     * @param pass Password of the user
+     * 
+     * @return boolean
+     */
+    public static function insert($name,$login,$mail,$pass)
+    {
+        $pass=hash('sha256' ,md5($pass));
+        try
+        {
+            $query='INSERT INTO usuario(nom_user, login_user, mail_user, pass_user, img_user, date_login, cod_t_user, cod_state) VALUES (?, ?, ?, ?, "def.png", ?, 2, 1)';
+            DB::insert($query,[$name,$login,$mail,$pass,date('Y-m-d H:i:s')]);
             return true;
         }
         catch(Exception $e)

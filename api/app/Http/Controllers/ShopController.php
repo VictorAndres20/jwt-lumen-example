@@ -32,6 +32,8 @@ class ShopController extends Controller
     /**
      * Get shops by cod_user.
      * Relation= Shop belong to User | User has many Shop.
+     * 
+     * @return response
      */
      public function getAllShopsByUSer($cod_user)
      {

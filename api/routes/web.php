@@ -26,8 +26,12 @@ $router->post('/login','AuthController@authenticate');
  * ALL PROTECTED ROUTES WITH JWT
  */
 $router->group(['middleware' => 'jwt'],function() use ($router){
+    /** RETRIVE with HTTP verb GET */
     $router->get('/users','UserController@getAll');
-    $router->get('/shopbyuser/{cod_user}','ShopController@getAllShopsByUSer');
-    $router->post('/updatelogin','UserController@updateLogin');
+    $router->get('/shopuser/{cod_user}','ShopController@getAllShopsByUSer');
+    /** UPDATES with HTTP verb PUT */
+    $router->put('/updatelogin','UserController@updateLogin');
+    /** CREATE with HTTP verb POST */
+    $router->post('/create','UserController@insert');
 });
 

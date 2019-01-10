@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 class Shop extends Model
 {
     /*************************************************************
-     * Update statements
+     * UPDATE statements
      */
 
     /**
@@ -56,7 +56,7 @@ class Shop extends Model
     }
 
     /********************************************************************
-     * Select statements
+     * SELECT statements
      */
 
     /**
