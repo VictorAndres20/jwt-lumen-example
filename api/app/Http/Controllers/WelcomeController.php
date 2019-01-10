@@ -16,7 +16,7 @@ class WelcomeController extends Controller
 
     public function index()
     {
-        //$version=$app->version();
+        $version=app()->version();
         $HTML="
         <!DOCTYPE html>
         <html>
@@ -33,37 +33,43 @@ class WelcomeController extends Controller
 
 			font-family: fantasy,Monospace;
         }
-        .full-height {
+        .full-height{
             height: 100vh;
         }
-        .flex-center {
+        .flex-center{
             align-items: center;
             display: flex;
             justify-content: center;
         }
 
-        .position-ref {
+        .position-ref{
             position: relative;
         }
 
-        .top-right {
+        .top-right{
             position: absolute;
             right: 10px;
             top: 18px;
         }
 
-        .content {
+        .content{
             text-align: center;
         }
 
-        .title {
+        .title{
             font-size: 60px;
             margin-left:20px;
             margin-right:20px;
         }
 
-        .links > a {
-            color: #636b6f;
+        .paragraph{
+            font-size: 30px;
+            margin-left:20px;
+            margin-right:20px;
+        }
+
+        .links > a{
+            color: #fff;
             padding: 0 25px;
             font-size: 12px;
             font-weight: 600;
@@ -72,7 +78,7 @@ class WelcomeController extends Controller
             text-transform: uppercase;
         }
 
-        .m-b-md {
+        .m-b-md{
             margin-bottom: 30px;
         }
         </style>
@@ -82,6 +88,9 @@ class WelcomeController extends Controller
             <div class='content'>
                 <div class='title m-b-md'>
                     Lumen + JWT
+                </div>
+                <div class='paragraph m-b-md'>
+                    ".$version."
                 </div>
                 <div class='links'>
                     <a href='https://laravel.com/docs'>Laravel Docs</a>
